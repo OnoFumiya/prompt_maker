@@ -1,0 +1,7 @@
+object_list
+- lunch_box
+- snack
+- detergent
+- cup
+- noodle
+- apple

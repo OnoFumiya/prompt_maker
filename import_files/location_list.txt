@@ -1,0 +1,7 @@
+location_list
+- instruction_point
+- kitchen#table
+- kitchen#chair
+- kitchen#trash_box
+- living_room#table
+- living_room#sofa
