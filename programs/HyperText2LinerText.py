@@ -7,7 +7,12 @@ def convert_text_file(input_file, output_file):
             data = data[:-1]
         else:
             break
-    re_data = data.replace("\n", "\\n")
+    re_data = data
+    re_data = re_data.replace("\n", "\\n")
+    re_data = re_data.replace("\"", "\\\"")
+    re_data = re_data.replace("\'", "\\\'")
+    re_data = re_data.replace("“", "\\\"")
+    re_data = re_data.replace("”", "\\\"")
 
     temp_data = re_data
     re_data = ""

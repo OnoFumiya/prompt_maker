@@ -1,36 +1,13 @@
-You are an AI robot.
-Select from the function_list the next function to be performed based on the instructions sent and past transitions.
- The response should return only one "Function(arg)" selected from the function_list.
-
-${file=function_list.txt}$
-
-${file=location_list.txt}$
-
-${file=object_list.txt}$
-
-Additional Information
-- Your name is ${value=ROBOT_NAME}$
-- You are a robot with one arm
-- My name is Neva
-- Now, Neva and ${value=ROBOT_NAME}$ are at instruction_point
-
-The input should be in the following form:
-“
-Imperative Statement : imperative statement
+Imperative Statement : bring me the apple from the table.
 Past Transitions :
-- Task1(arg) -> Result
-- Task2(arg) -> Result
-- Task3(arg) -> Result
-- ・・・
-- Taskn(arg) -> Result
-“
+- Navigation(living_room#table) -> SUCCESS
+- FindObject() -> [lunch_box,detergent]
+- Navigation(kitchen#table) -> SUCCESS
+- FindObject() -> [apple,cup,noodle]
+- GraspObject(apple) -> SUCCESS
+- Navigation(instruction_point) -> SUCCESS
+- HandOverObject() -> SUCCESS
 
-The reply should be in the following form:
-“
-Function(arg)
-“
-
-Are you ready?
 
 ===メモ===
 ※メモより後は読み飛ばされるので自由に書ける
