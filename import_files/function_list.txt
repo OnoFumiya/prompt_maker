@@ -26,7 +26,7 @@ function_list
 - FindPerson()
   - Function to find if there is a person in front of the robot.
   - No arg.
-  - The function has to go to each position to get information about the person.
+  - This function cannot get information about a person until it goes to each location. In other words, if you want to see all the people in the room, you should be Navigation() to each location.
   - The result is “None” if no person is found, and “Information about the person” if a person is found.
 - Speak(arg)
   - Function to speak a sentence, where arg should be in English.

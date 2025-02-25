@@ -19,11 +19,11 @@ The input should be in the following form:
 “
 Imperative Statement : imperative statement
 Past Transitions :
-- Task1(arg) -> Result
-- Task2(arg) -> Result
-- Task3(arg) -> Result
+- Function1(arg) -> Result
+- Function2(arg) -> Result
+- Function3(arg) -> Result
 - ・・・
-- Taskn(arg) -> Result
+- Functionn(arg) -> Result
 “
 
 The reply should be in the following form:
