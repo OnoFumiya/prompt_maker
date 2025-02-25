@@ -1,9 +1,7 @@
 import rclpy
 from rclpy.action import ActionClient
 from rclpy.node import Node
-
 from sobits_interfaces.action import ChatLlmRecognition
-
 import os
 
 
@@ -66,7 +64,71 @@ def llm_recognition(node=None):
     # send_msg.model_name = "deepseek-llm"
     send_msg.model_name = "phi4"
 
+    ###################################################################
+    print("\033[95m")
+    print("\"send_goal.txt\" can be rewritten. Press \033[0m\033[5m\"Enter Button\"\033[0m\033[95m when finished.\033[0m : \033[0m\n\033[F\033[72C", end="")
+    input()
+    print()
+    send_msg.request = open("../base_files/send_goal.txt", "r", encoding="utf-8").read()
+    send_msg.request = send_msg.request.split("===メモ===")[0].split("---")[0]
+    while (send_msg.request[-1] == "\n"): send_msg.request = send_msg.request[:-1]
+    ###################################################################
 
+    print("=============================\033[36m")
+    print(send_msg.request + "\033[0m")
+    print("=============================")
+    
+    send_msg.is_stack = False
+    send_msg.image = []
+
+    future = action_client.send_goal_async(send_msg, feedback_callback=feedback_callback)
+    rclpy.spin_until_future_complete(node, future)
+    goal_handle = future.result()
+
+    wip_result = ""
+    print("\n------------------FEEDBACK--------------------\n\033[K\n----------------------------------------------\n\n\n\n")
+    while not feedback_msg.end_flag:
+        rclpy.spin_once(node)
+        if ((len(wip_result) != len(feedback_msg.wip_result))):     # こちらはFeedbackとして黄色で出力されます．未完成の文が出力される
+            wip_result = feedback_msg.wip_result
+            print("\033[7F\033[K" + "------------------FEEDBACK--------------------")
+            print("\033[K\033[93m" + wip_result + "\033[0m")
+            print("\033[K" + "----------------------------------------------\n\n\n\n")
+
+
+    # 結果の取得
+    result_future = goal_handle.get_result_async()
+    rclpy.spin_until_future_complete(node, result_future)
+    result = result_future.result().result
+    feedback_msg.end_flag = False
+    feedback_msg.wip_result = ""
+
+    # 結果の出力
+    print("\033[7F\033[K" + "------------------RESULT--------------------\n\033[K\033[92m" + result.result + "\033[0m")
+    print("\033[K" + "----------------------------------------------")
+    print("\t\t\t\t\t\033[0m(Elapsed Time: ", result.elapsed_time, ")")  # 返答までにかかった時間も出力されます
+
+
+def main():
+    # rclpyの初期化
+    rclpy.init()
+
+    # ノードの作成
+    node = Node("test_ollama_ros_llm")
+
+    while rclpy.ok():
+        llm_recognition(node)   # ノードをmain関数に継承する
+        print("===")
+
+    rclpy.spin(node)
+
+
+
+if __name__ == "__main__":
+    main()
+
+
+## 68行目から74行目にこれを入れるとキーボードからの入力モードになる
     ###################################################################
     # funcs = selection()
     # print("Imperative Statement : ", end="")
@@ -92,66 +154,3 @@ def llm_recognition(node=None):
 
     # send_msg.request = "Imperative Statement : " + imperative_statement + "\nPast Transitions :" + past_transitions
     ###################################################################
-
-    print("\033[05m")
-    print("\"send_goal.txt\" can be rewritten. Press \"Enter\" button when finished. : \033[0m", end="")
-    input()
-    send_msg.request = open("../base_files/send_goal.txt", "r", encoding="utf-8").read()
-    send_msg.request = send_msg.request.split("===メモ===")[0].split("---")[0]
-    while (send_msg.request[-1] == "\n"): send_msg.request = send_msg.request[:-1]
-
-    print("=============================\033[36m")
-    print(send_msg.request + "\033[0m")
-    print("=============================")
-    
-    send_msg.is_stack = False
-    send_msg.image = []
-
-    # ゴールを送信してフィードバックと結果を処理
-    future = action_client.send_goal_async(
-        send_msg, feedback_callback=feedback_callback
-    )
-    rclpy.spin_until_future_complete(node, future)
-
-    # ゴール送信の結果を取得
-    goal_handle = future.result()
-
-    wip_result = ""
-    while not feedback_msg.end_flag:
-        rclpy.spin_once(node)
-
-        # if ((len(wip_result) != len(feedback_msg.wip_result))):
-        #     wip_result = feedback_msg.wip_result
-        #     print("\n------------------FEEDBACK--------------------")     # こちらはFeedbackとして黄色で出力されます．おそらく未完成の文が順に出力されているでしょう
-        #     print("\033[33m", wip_result, "\033[0m")
-        #     print("----------------------------------------------")
-
-    # 結果の取得
-    result_future = goal_handle.get_result_async()
-    rclpy.spin_until_future_complete(node, result_future)
-    result = result_future.result().result
-
-    # 結果の出力
-    print("\n------------------RESULT--------------------")     # こちらは最終的な出力が緑色で出力されます．
-    print("Result: \033[92m",result.result)
-    print("\t\t\t\t\t\033[0m(Elapsed Time: ", result.elapsed_time, ")")  # 返答までにかかった時間も出力されます
-    print("--------------------------------------------")
-
-
-def main():
-    # rclpyの初期化
-    rclpy.init()
-
-    # ノードの作成
-    node = Node("test_ollama_ros_llm")
-
-    while rclpy.ok():
-        llm_recognition(node)   # ノードをmain関数に継承する
-        print("===")
-
-    rclpy.spin(node)
-
-
-
-if __name__ == "__main__":
-    main()
