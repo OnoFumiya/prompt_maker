@@ -12,11 +12,3 @@ Past Transitions :
 
 ===メモ===
 ※メモより後は読み飛ばされるので自由に書ける
-
-${value=XXX}$はprograms/BaseText2HyperText.pyの10行目あたりのreplace_txtに書かれた法則に従い書き換えられる。
-例えばreplace_txtには"ROBOT_NAME":"SOBIT PRO"と書いてあるのでYour name is ${value=ROBOT_NAME}$.はYour name is SOBIT PROと置き換わる。
-
-${file=FILE_NAME.txt}$はimport_files/FILE_NAME.txtの中身へ書き換えられる。
-例えばimport_files/object_list.txtには名前のリストの部分のプロンプトだけが書かれていて、${file=object_list.txt}$のところがobject_list.txtの中身に書き換わるようになる。
-
-これらは、例えば当日にならないとわからない部分(例のように日付やSetupDayに公開される地点登録リストなど)をここでいつでも変えられるようにすると良いと思う。
