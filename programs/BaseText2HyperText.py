@@ -9,6 +9,7 @@ weekday_name = calendar.day_name[datetime.date.today().weekday()]
 
 replace_txt = {
     "DATE"        : str(weekday_name) + ", " + month_name + " " + str(dt_now.day) + ", " + str(dt_now.year),
+    "TIME"        : str(dt_now.hour) + ":" + str(dt_now.minute),
     "ROBOT_NAME"  : "SOBIT PRO",
     "HOST_NAME"   : "Tom",
 }

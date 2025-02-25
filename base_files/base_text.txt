@@ -14,6 +14,7 @@ Additional Information
 - My name is ${value=HOST_NAME}$
 - Now, ${value=HOST_NAME}$ and ${value=ROBOT_NAME}$ are at instruction_point
 - Today is ${value=DATE}$.
+- It is now ${value=TIME}$.
 
 The input should be in the following form:
 “
