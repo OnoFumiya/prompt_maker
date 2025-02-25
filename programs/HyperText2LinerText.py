@@ -1,12 +1,8 @@
 def convert_text_file(input_file, output_file):
     data = open(input_file, "r", encoding="utf-8").read()
-
     data = data.split("===メモ===")[0]
-    while True:
-        if (data[-1] == "\n"):
-            data = data[:-1]
-        else:
-            break
+    while (data[-1] == "\n"): data = data[:-1]
+
     re_data = data
     re_data = re_data.replace("\n", "\\n")
     re_data = re_data.replace("\"", "\\\"")

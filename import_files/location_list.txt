@@ -5,3 +5,4 @@ location_list
 - kitchen#trash_box
 - living_room#table
 - living_room#sofa
+- exit

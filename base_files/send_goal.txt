@@ -1,0 +1,20 @@
+Imperative Statement : bring me the apple from the table.
+Past Transitions :
+- Navigation(kitchen#table) -> SUCCESS
+- FindObject() -> [lunch_box,cup]
+- Navigation(living_room#table) -> SUCCESS
+- FindObject() -> [detergent,apple,cup]
+- GraspObject(apple) -> SUCCESS
+- Navigation(instruction_point) -> SUCCESS
+- PassObject() -> SUCCESS
+---
+- End()
+
+
+
+
+===メモ===
+※メモより後は読み飛ばされるので自由に書ける
+
+「---」までをactionlibで送って正しい結果が返ってくるかを確認できるテキスト
+上の場合、「- FindObject() -> [detergent,apple,cup]」までをLLMに送っているので、LLMからは次の行の「GraspObject(apple)」と来たら成功となる。

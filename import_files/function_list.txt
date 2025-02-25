@@ -12,7 +12,7 @@ function_list
   - No arg.
   - This function is performed after Navigation() to the table or desk where you want to place it.
   - The result is “SUCCESS” or “FAILED”.
-- HandOverObject()
+- PassObject()
   - Function to pass the object you have to the person.
   - No arg.
   - This function is performed after Navigation() to the table or desk where you want to place it.
@@ -23,6 +23,11 @@ function_list
   - If there are multiple objects in front of the robot, [A,B,C,C,C] is returned in duplicate.
   - If there is no object to find, navigation to the next position is performed.
   - The result is a “list of objects” found in object_list.
+- FindPerson()
+  - Function to find if there is a person in front of the robot.
+  - No arg.
+  - The function has to go to each position to get information about the person.
+  - The result is “None” if no person is found, and “Information about the person” if a person is found.
 - Speak(arg)
   - Function to speak a sentence, where arg should be in English.
   - arg is assumed to be in English.

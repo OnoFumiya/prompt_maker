@@ -61,33 +61,45 @@ def llm_recognition(node=None):
     # send_msg.model_name = "llama3.2"
     # send_msg.model_name = "llama3.2-vision"
     # send_msg.model_name = "llama3"
+    # send_msg.model_name = "minicpm-v"
+    # send_msg.model_name = "deepseek-r1"
     # send_msg.model_name = "deepseek-llm"
     send_msg.model_name = "phi4"
 
-    funcs = selection()
 
-    print("Imperative Statement : ", end="")
-    imperative_statement = str(input())
+    ###################################################################
+    # funcs = selection()
+    # print("Imperative Statement : ", end="")
+    # imperative_statement = str(input())
 
-    print("Past Transitions")
-    past_transitions = ""
-    while True:
-        print(" ".join(list(funcs.keys())) + " : ", end="")
-        functions = str(input())
-        if (functions == ""):
-            break
-        val = ""
-        if (funcs[functions]):
-            if (type(funcs[functions]) == list):
-                print(" ".join(funcs[functions]) + " : ", end="")
-            else:
-                print(funcs[functions] + " : ", end="")
-            val = str(input())
-        print(functions + "\'s Results (option:SUCCESS,FAILED) : ", end="")
-        res = str(input())
-        past_transitions += "\n- " + functions + "(" + val + ") -> " + res
+    # print("Past Transitions")
+    # past_transitions = ""
+    # while True:
+    #     print(" ".join(list(funcs.keys())) + " : ", end="")
+    #     functions = str(input())
+    #     if (functions == ""):
+    #         break
+    #     val = ""
+    #     if (funcs[functions]):
+    #         if (type(funcs[functions]) == list):
+    #             print(" ".join(funcs[functions]) + " : ", end="")
+    #         else:
+    #             print(funcs[functions] + " : ", end="")
+    #         val = str(input())
+    #     print(functions + "\'s Results (option:SUCCESS,FAILED) : ", end="")
+    #     res = str(input())
+    #     past_transitions += "\n- " + functions + "(" + val + ") -> " + res
 
-    send_msg.request = "Imperative Statement : " + imperative_statement + "\nPast Transitions :" + past_transitions
+    # send_msg.request = "Imperative Statement : " + imperative_statement + "\nPast Transitions :" + past_transitions
+    ###################################################################
+
+    print("\033[05m")
+    print("\"send_goal.txt\" can be rewritten. Press \"Enter\" button when finished. : \033[0m", end="")
+    input()
+    send_msg.request = open("../base_files/send_goal.txt", "r", encoding="utf-8").read()
+    send_msg.request = send_msg.request.split("===メモ===")[0].split("---")[0]
+    while (send_msg.request[-1] == "\n"): send_msg.request = send_msg.request[:-1]
+
     print("=============================\033[36m")
     print(send_msg.request + "\033[0m")
     print("=============================")

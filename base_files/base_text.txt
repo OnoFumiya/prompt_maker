@@ -11,8 +11,9 @@ ${file=object_list.txt}$
 Additional Information
 - Your name is ${value=ROBOT_NAME}$
 - You are a robot with one arm
-- My name is Neva
-- Now, Neva and ${value=ROBOT_NAME}$ are at instruction_point
+- My name is ${value=HOST_NAME}$
+- Now, ${value=HOST_NAME}$ and ${value=ROBOT_NAME}$ are at instruction_point
+- Today is ${value=DATE}$.
 
 The input should be in the following form:
 “

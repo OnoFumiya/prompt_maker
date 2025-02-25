@@ -1,12 +1,13 @@
-Imperative Statement : bring me the apple from the table.
+Imperative Statement : Tell me how many person in the living room
 Past Transitions :
 - Navigation(living_room#table) -> SUCCESS
-- FindObject() -> [lunch_box,detergent]
-- Navigation(kitchen#table) -> SUCCESS
-- FindObject() -> [apple,cup,noodle]
-- GraspObject(apple) -> SUCCESS
+- FindPerson() -> there are two people.
+- Navigation(living_room#sofa) -> SUCCESS
+- FindPerson() -> there is a person.
 - Navigation(instruction_point) -> SUCCESS
-- HandOverObject() -> SUCCESS
+- Speak(there are 3 persons.)
+
+
 
 
 ===メモ===
