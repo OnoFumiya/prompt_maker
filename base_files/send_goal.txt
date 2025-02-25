@@ -4,10 +4,10 @@ Past Transitions :
 - FindObject() -> [lunch_box,cup]
 - Navigation(living_room#table) -> SUCCESS
 - FindObject() -> [detergent,apple,cup]
+---
 - GraspObject(apple) -> SUCCESS
 - Navigation(instruction_point) -> SUCCESS
 - PassObject() -> SUCCESS
----
 - End()
 
 
